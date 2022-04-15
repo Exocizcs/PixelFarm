@@ -21,9 +21,20 @@ public class Player : MonoBehaviour
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
 
-        rigidbody.MovePosition(transform.position + (direction.normalized * speed * Time.deltaTime));
-
         UpdateAnimator();
+    }
+
+    private void FixedUpdate()
+    {
+        if (direction != Vector3.zero)
+        {
+            var delta = direction.normalized * speed * Time.deltaTime;
+            rigidbody.MovePosition(transform.position + delta);
+        }
+        else
+        {
+            rigidbody.velocity = Vector2.zero;
+        }
     }
     private void UpdateAnimator()
     {
