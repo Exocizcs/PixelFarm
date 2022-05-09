@@ -1,4 +1,5 @@
 using UnityEngine;
+using Pause;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
 
     private void Update() 
     {
+        if (PauseMovement.IsActive()) return;
+
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
 
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMovement.IsActive()) return;
         if (direction != Vector3.zero)
         {
             var delta = direction.normalized * speed * Time.deltaTime;

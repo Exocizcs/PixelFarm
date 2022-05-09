@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using Pause;
 
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour, IPauser
 {
     private static event Action<DialogueData> OnDialogueRequested;
     public static void RequestDialogue(DialogueData dialogue) => OnDialogueRequested?.Invoke(dialogue); 
